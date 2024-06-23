@@ -107,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     ),
                   ),
                   [const TopRatedMoviesTab(), const PopularMoviesTab()][_tabController.index],
+                  const SizedBox(height: 24),
                 ],
               ),
             );

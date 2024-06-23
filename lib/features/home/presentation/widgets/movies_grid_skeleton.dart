@@ -59,10 +59,10 @@ class _MovieItemWidgetSkeleton extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: ShimmerWidget.rectangular(height: 16, width: 50),
+          child: ShimmerWidget.rectangular(height: 16, width: 100),
         ),
       ],
     );
