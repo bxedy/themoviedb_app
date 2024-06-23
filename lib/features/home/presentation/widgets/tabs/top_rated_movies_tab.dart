@@ -22,7 +22,7 @@ class _TopRatedMoviesTabState extends State<TopRatedMoviesTab> {
         valueListenable: controller.state,
         builder: (context, s, w) {
           return s == LoadingState.loading
-              ? MoviesGridSkeleton()
+              ? const MoviesGridSkeleton()
               : ResponsiveGridList(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

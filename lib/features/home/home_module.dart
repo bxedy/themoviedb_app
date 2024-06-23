@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:themoviedb_app/core/app_client.dart';
 import 'package:themoviedb_app/core/app_routes.dart';
 import 'package:themoviedb_app/features/home/data/datasource/movies_datasource.dart';
 import 'package:themoviedb_app/features/home/data/datasource/remote/movies_datasource_imp.dart';
@@ -25,7 +26,9 @@ class HomeModule extends Module {
     ),
     //Datasources
     Bind.factory<MoviesDatasource>(
-      (i) => MoviesDatasourceImp(),
+      (i) => MoviesDatasourceImp(
+        i.get<AppClient>(),
+      ),
     ),
     //Repository
     Bind.factory<MoviesRepository>(

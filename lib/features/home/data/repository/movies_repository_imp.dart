@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:themoviedb_app/core/failures/failures.dart';
 import 'package:themoviedb_app/features/home/data/datasource/movies_datasource.dart';
 import 'package:themoviedb_app/features/home/domain/entity/movie.dart';
@@ -14,10 +15,10 @@ class MoviesRepositoryImp extends MoviesRepository {
     try {
       var response = await moviesDatasource.fetchPopular();
       return Right(response);
-    } on Failure catch (_) {
-      return Left(UnhandledFailure());
+    } on DioException catch (e) {
+      return Left(Failure.fromDioError(e));
     } on Exception {
-      return Left(UnhandledFailure()); //TODO: remover mock
+      return Left(UnhandledFailure());
     }
   }
 
@@ -26,8 +27,8 @@ class MoviesRepositoryImp extends MoviesRepository {
     try {
       var response = await moviesDatasource.fetchTopRated();
       return Right(response);
-    } on Failure catch (_) {
-      return Left(UnhandledFailure());
+    } on DioException catch (e) {
+      return Left(Failure.fromDioError(e));
     } on Exception {
       return Left(UnhandledFailure());
     }
