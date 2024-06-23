@@ -3,6 +3,8 @@ import 'package:responsive_grid/responsive_grid.dart';
 import 'package:themoviedb_app/core/app_gradients.dart';
 import 'package:themoviedb_app/core/app_icons.dart';
 import 'package:themoviedb_app/core/widgets/gradient_text.dart';
+import 'package:themoviedb_app/features/home/presentation/widgets/tabs/popular_movies_tab.dart';
+import 'package:themoviedb_app/features/home/presentation/widgets/tabs/top_rated_movies_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -104,57 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ),
                     ),
                   ),
-                  [
-                    const Center(
-                      child: Text(
-                        'Tendências',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    ResponsiveGridList(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      desiredItemWidth: 100,
-                      minSpacing: 10,
-                      children: List.generate(30, (index) => index + 1).map((i) {
-                        return Container(
-                          height: 160,
-                          margin: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                      image: NetworkImage(
-                                        "https://via.placeholder.com/150x225",
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8.0),
-                              Text(
-                                'Movie Title $i',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    )
-                  ][_tabController.index],
+                  [TopRatedMoviesTab(), const PopularMoviesTab()][_tabController.index],
                 ],
               ),
             );

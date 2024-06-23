@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.0.10+1
   responsive_grid: ^2.4.4
+  dio: any
+  dartz: any
 
 dev_dependencies:
   flutter_test:

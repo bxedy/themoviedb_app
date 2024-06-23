@@ -40,7 +40,7 @@ class AppIcon extends StatelessWidget {
   final Function()? onTap;
 
   const AppIcon({
-    Key? key,
+    super.key,
     this.icon,
     this.fit,
     this.color,
@@ -48,7 +48,7 @@ class AppIcon extends StatelessWidget {
     this.height,
     this.width,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
