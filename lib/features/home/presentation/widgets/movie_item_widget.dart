@@ -1,41 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:themoviedb_app/features/home/domain/entity/movie.dart';
 
 class MovieItemWidget extends StatelessWidget {
-  const MovieItemWidget({super.key});
+  final MovieEntity movie;
+
+  const MovieItemWidget({
+    super.key,
+    required this.movie,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 160,
-      margin: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Stack(
+          clipBehavior: Clip.none,
+          children: <Widget>[
+            Container(
+              height: 160,
               decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: NetworkImage(
-                    "https://via.placeholder.com/150x225",
-                  ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8),
+                ),
+                image: DecorationImage(
+                  image: NetworkImage(movie.posterPath ?? ''),
                   fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-          ),
-          const SizedBox(height: 8.0),
-          const Text(
-            'Top Rated Movie Title',
+            Positioned(
+              bottom: -16,
+              left: 14,
+              child: Stack(
+                children: [
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF081C22),
+                    ),
+                    child: Center(
+                      child: FittedBox(
+                        child: Text(
+                          '${(movie.voteAverage ?? .0).toStringAsFixed(0)}%',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 36,
+                    height: 36,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: CircularProgressIndicator(
+                        value: (movie.voteAverage ?? .0) / 100,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          (movie.voteAverage ?? .0) < 70 ? Colors.yellowAccent : Colors.green,
+                        ),
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            movie.originalTitle ?? '',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 14.0,
+            style: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.start,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
