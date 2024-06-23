@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_grid/responsive_grid.dart';
 import 'package:themoviedb_app/core/app_gradients.dart';
 import 'package:themoviedb_app/core/app_icons.dart';
 import 'package:themoviedb_app/core/widgets/gradient_text.dart';
@@ -68,8 +67,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 16),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 1),
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ),
                     ),
                   ),
-                  [TopRatedMoviesTab(), const PopularMoviesTab()][_tabController.index],
+                  [const TopRatedMoviesTab(), const PopularMoviesTab()][_tabController.index],
                 ],
               ),
             );

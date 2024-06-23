@@ -28,11 +28,11 @@ class MovieModel extends MovieEntity {
       originalTitle: json['original_title'],
       overview: json['overview'],
       popularity: json['popularity']?.toDouble(),
-      posterPath: json['poster_path'],
+      posterPath: 'https://image.tmdb.org/t/p/w500/${json['poster_path']}',
       releaseDate: json['release_date'],
       title: json['title'],
       video: json['video'],
-      voteAverage: json['vote_average']?.toDouble(),
+      voteAverage: (json['vote_average'].toDouble() * 10),
       voteCount: json['vote_count'],
     );
   }
