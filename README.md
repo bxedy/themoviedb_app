@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Listing App</title>
+  <title>The Movie DB App</title>
 </head>
 <body>
 
-<h1>Movie Listing App</h1>
+<h1>The Movie DB App</h1>
 
 <p>This Flutter application allows users to search for TV shows and movies, view popular and trending categories, and enjoy a seamless experience with advanced features and optimizations.</p>
 
@@ -27,17 +27,11 @@
 
 <h2>Getting Started</h2>
 
-<h3>Prerequisites</h3>
-<ul>
-  <li>Flutter SDK</li>
-  <li>Dart SDK</li>
-</ul>
-
 <h3>Installation</h3>
 <ol>
   <li>Clone the repository:
-    <pre><code>git clone https://github.com/yourusername/movielistingapp.git
-cd movielistingapp</code></pre>
+    <pre><code>git clone https://github.com/bxedy/themoviedb_app/
+cd themoviedb_app</code></pre>
   </li>
   <li>Install dependencies:
     <pre><code>flutter pub get</code></pre>
@@ -60,7 +54,6 @@ cd movielistingapp</code></pre>
 
 <h2>Screenshots</h2>
 <img src="https://github.com/bxedy/themoviedb_app/assets/86973277/eb4dd772-c78f-490b-aca0-96a9c2a40f58.gif" width="31%">
-<img src="https://github.com/bxedy/themoviedb_app/assets/86973277/eb4dd772-c78f-490b-aca0-96a9c2a40f58.gif" width="31%">
+<img src="https://github.com/bxedy/themoviedb_app/assets/86973277/6ce9cfaf-295b-49f1-9278-2bd8dac57c2c.gif" width="31%">
 
-</body>
 </html>
