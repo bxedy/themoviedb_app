@@ -21,47 +21,84 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          AppBar(
-            backgroundColor: const Color(0xff032541),
-            leading: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: AppIcons.tmdbLogo.icon(
-                fit: BoxFit.fitWidth,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppBar(
+              backgroundColor: const Color(0xff032541),
+              leading: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AppIcons.tmdbLogo.icon(
+                  fit: BoxFit.fitWidth,
+                ),
               ),
+              leadingWidth: 200,
             ),
-            leadingWidth: 200,
-          ),
-          const SizedBox(height: 4),
-          TextFormField(
-            decoration: InputDecoration(
-              prefixIcon: const Padding(
-                padding: EdgeInsets.only(bottom: 4.0),
-                child: Icon(Icons.search),
-              ),
-              hintText: 'Buscar por um Filme, Série ou Pessoa',
-              hintStyle: TextStyle(color: Colors.grey.shade400),
-            ),
-          ),
-          ListenableBuilder(
-              listenable: Listenable.merge([searchController.state, textEditingController]),
-              builder: (context, s) {
-                return SingleChildScrollView(
-                  child: searchController.state.value != LoadingState.loaded && textEditingController.text.isNotEmpty
-                      ? const MoviesGridSkeleton()
-                      : ResponsiveGridList(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          desiredItemWidth: 100,
-                          minSpacing: 10,
-                          children: List.generate(searchController.movies?.length ?? 0, (index) => index).map((i) {
-                            return MovieItemWidget(movie: searchController.movies![i]);
-                          }).toList(),
+            const SizedBox(height: 4),
+            AnimatedBuilder(
+                animation: textEditingController,
+                builder: (context, _) {
+                  return TextFormField(
+                    onChanged: (value) {
+                      if (value == "") {
+                        searchController.undoSearch();
+                        textEditingController.clear();
+                      } else {
+                        searchController.search(value);
+                      }
+                    },
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                    controller: textEditingController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.only(bottom: 4.0),
+                        child: Icon(Icons.search),
+                      ),
+                      suffixIcon: Visibility(
+                        visible: textEditingController.text.isNotEmpty,
+                        child: IconButton(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          onPressed: () {
+                            textEditingController.clear();
+                            searchController.undoSearch();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.blue,
+                          ),
                         ),
-                );
-              })
-        ],
+                      ),
+                      hintText: 'Buscar por um Filme, Série ou Pessoa',
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                    ),
+                  );
+                }),
+            ValueListenableBuilder(
+                valueListenable: searchController.state,
+                builder: (context, s, w) {
+                  return searchController.state.value == LoadingState.loading
+                      ? const MoviesGridSkeleton()
+                      : (searchController.state.value == LoadingState.loaded &&
+                              searchController.movies?.isEmpty == true)
+                          ? const Padding(
+                              padding: EdgeInsets.all(24),
+                              child: Text(
+                                'Não foram encontrados filmes que correspondam aos seus critérios de busca.',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            )
+                          : ResponsiveGridList(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              desiredItemWidth: 100,
+                              minSpacing: 10,
+                              children: List.generate(searchController.movies?.length ?? 0, (index) => index).map((i) {
+                                return MovieItemWidget(movie: searchController.movies![i]);
+                              }).toList(),
+                            );
+                })
+          ],
+        ),
       ),
     );
   }
