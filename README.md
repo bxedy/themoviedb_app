@@ -40,13 +40,6 @@ cd themoviedb_app</code></pre>
 <p>To run unit tests:</p>
 <pre><code>flutter test</code></pre>
 
-<h2>Usage</h2>
-<ul>
-  <li><strong>Search</strong>: Use the search bar to look for TV shows and movies. The debounce feature ensures efficient querying.</li>
-  <li><strong>Popular & Trending</strong>: Switch between popular and trending categories using the provided tabs.</li>
-  <li><strong>Error Handling</strong>: If an error occurs, the app will handle it gracefully.</li>
-</ul>
-
 <h2>Screenshots</h2>
 <img src="https://github.com/bxedy/themoviedb_app/assets/86973277/eb4dd772-c78f-490b-aca0-96a9c2a40f58.gif" width="31%">
 
