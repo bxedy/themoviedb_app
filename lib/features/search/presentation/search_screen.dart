@@ -3,8 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:themoviedb_app/core/app_icons.dart';
 import 'package:themoviedb_app/core/enums/loading_state.dart';
-import 'package:themoviedb_app/shared/presentation/widgets/movie_item_widget.dart';
 import 'package:themoviedb_app/features/search/presentation/search_controller.dart';
+import 'package:themoviedb_app/shared/presentation/widgets/movie_item_widget.dart';
 import 'package:themoviedb_app/shared/presentation/widgets/movies_grid_skeleton.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -30,6 +30,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: AppIcons.tmdbLogo.icon(
                   fit: BoxFit.fitWidth,
+                  onTap: () {
+                    Modular.to.pop();
+                  },
                 ),
               ),
               leadingWidth: 200,
@@ -39,6 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 animation: textEditingController,
                 builder: (context, _) {
                   return TextFormField(
+                    autofocus: true,
                     onChanged: (value) {
                       if (value == "") {
                         searchController.undoSearch();

@@ -10,14 +10,15 @@ import 'package:themoviedb_app/shared/data/models/movie.dart';
 
 import 'movies_data_source_imp_test.mocks.dart';
 
+
 @GenerateMocks([HomeDatasource])
 void main() {
   late HomeRepositoryImp repository;
-  late MockMoviesDatasource mockMoviesDatasource;
+  late MockHomeDatasource mockHomeDatasource;
 
   setUp(() {
-    mockMoviesDatasource = MockMoviesDatasource();
-    repository = HomeRepositoryImp(mockMoviesDatasource);
+    mockHomeDatasource = MockHomeDatasource();
+    repository = HomeRepositoryImp(mockHomeDatasource);
   });
 
   final tMovies = [
@@ -41,18 +42,17 @@ void main() {
 
   group('fetchPopular', () {
     test('should return list of movies when the call to datasource is successful', () async {
-      when(mockMoviesDatasource.fetchPopularMovies()).thenAnswer((_) async => tMovies);
+      when(mockHomeDatasource.fetchPopularMovies()).thenAnswer((_) async => tMovies);
 
       final result = await repository.fetchPopularMovies();
 
       expect(result, Right(tMovies));
-      verify(mockMoviesDatasource.fetchPopularMovies());
-      verifyNoMoreInteractions(mockMoviesDatasource);
+      verify(mockHomeDatasource.fetchPopularMovies());
+      verifyNoMoreInteractions(mockHomeDatasource);
     });
 
-   test('should return a Failure when the call to datasource is unsuccessful', () async {
-
-      when(await mockMoviesDatasource.fetchPopularMovies()).thenThrow(DioException(
+    test('should return a Failure when the call to datasource is unsuccessful', () async {
+      when(mockHomeDatasource.fetchPopularMovies()).thenThrow(DioException(
         requestOptions: RequestOptions(path: ''),
         response: Response(
           requestOptions: RequestOptions(path: ''),
@@ -60,45 +60,37 @@ void main() {
         ),
       ));
 
-      expectLater(
-        () async => await repository.fetchPopularMovies(),
-        throwsA(isA<Failure>()),
-      );
+      final result = await repository.fetchPopularMovies();
 
-      verify(mockMoviesDatasource.fetchPopularMovies());
-      verifyNoMoreInteractions(mockMoviesDatasource);
+      expect(result, isA<Left>());
+      result.leftMap((l) => expect(l, isA<AuthenticationFailed>()));
     });
   });
 
   group('fetchTopRated', () {
     test('should return list of movies when the call to datasource is successful', () async {
-
-      when(mockMoviesDatasource.fetchTopRatedMovies()).thenAnswer((_) async => tMovies);
+      when(mockHomeDatasource.fetchTopRatedMovies()).thenAnswer((_) async => tMovies);
 
       final result = await repository.fetchTopRatedMovies();
 
       expect(result, Right(tMovies));
-      verify(mockMoviesDatasource.fetchTopRatedMovies());
-      verifyNoMoreInteractions(mockMoviesDatasource);
+      verify(mockHomeDatasource.fetchTopRatedMovies());
+      verifyNoMoreInteractions(mockHomeDatasource);
     });
 
     test('should return a Failure when the call to datasource is unsuccessful', () async {
-
-      when(mockMoviesDatasource.fetchTopRatedMovies()).thenThrow(DioException(
+      when(mockHomeDatasource.fetchTopRatedMovies()).thenThrow(DioException(
         requestOptions: RequestOptions(path: ''),
         response: Response(
           requestOptions: RequestOptions(path: ''),
-          statusCode: 500,
+          statusCode: 401,
         ),
       ));
 
-      expect(
-        () async => await repository.fetchTopRatedMovies(),
-        throwsA(isA<InternalErrorFailure>()),
-      );
+      final result = await repository.fetchTopRatedMovies();
 
-      verify(mockMoviesDatasource.fetchTopRatedMovies());
-      verifyNoMoreInteractions(mockMoviesDatasource);
+      expect(result, isA<Left>());
+      result.leftMap((l) => expect(l, isA<AuthenticationFailed>()));
     });
   });
 }
