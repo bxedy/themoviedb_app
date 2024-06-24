@@ -6,9 +6,9 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:themoviedb_app/features/home/data/datasource/movies_datasource.dart'
+import 'package:themoviedb_app/features/home/data/datasource/home_datasource.dart'
     as _i2;
-import 'package:themoviedb_app/features/home/domain/entity/movie.dart' as _i4;
+import 'package:themoviedb_app/shared/domain/entity/movie.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -26,13 +26,13 @@ import 'package:themoviedb_app/features/home/domain/entity/movie.dart' as _i4;
 /// A class which mocks [MoviesDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMoviesDatasource extends _i1.Mock implements _i2.MoviesDatasource {
+class MockMoviesDatasource extends _i1.Mock implements _i2.HomeDatasource {
   MockMoviesDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<List<_i4.MovieEntity>> fetchPopular() => (super.noSuchMethod(
+  _i3.Future<List<_i4.MovieEntity>> fetchPopularMovies() => (super.noSuchMethod(
         Invocation.method(
           #fetchPopular,
           [],
@@ -42,7 +42,7 @@ class MockMoviesDatasource extends _i1.Mock implements _i2.MoviesDatasource {
       ) as _i3.Future<List<_i4.MovieEntity>>);
 
   @override
-  _i3.Future<List<_i4.MovieEntity>> fetchTopRated() => (super.noSuchMethod(
+  _i3.Future<List<_i4.MovieEntity>> fetchTopRatedMovies() => (super.noSuchMethod(
         Invocation.method(
           #fetchTopRated,
           [],

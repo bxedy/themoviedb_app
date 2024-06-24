@@ -16,6 +16,7 @@ dependencies:
   flutter_modular: 5.0.3
   intl: any
   shimmer: 3.0.0
+  animate_do: any
 
 dev_dependencies:
   flutter_test:

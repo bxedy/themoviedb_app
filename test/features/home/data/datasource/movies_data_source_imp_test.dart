@@ -4,20 +4,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:themoviedb_app/core/failures/failures.dart';
-import 'package:themoviedb_app/features/home/data/datasource/movies_datasource.dart';
-import 'package:themoviedb_app/features/home/data/models/movie.dart';
+import 'package:themoviedb_app/features/home/data/datasource/home_datasource.dart';
 import 'package:themoviedb_app/features/home/data/repository/movies_repository_imp.dart';
+import 'package:themoviedb_app/shared/data/models/movie.dart';
 
 import 'movies_data_source_imp_test.mocks.dart';
 
-@GenerateMocks([MoviesDatasource])
+@GenerateMocks([HomeDatasource])
 void main() {
-  late MoviesRepositoryImp repository;
+  late HomeRepositoryImp repository;
   late MockMoviesDatasource mockMoviesDatasource;
 
   setUp(() {
     mockMoviesDatasource = MockMoviesDatasource();
-    repository = MoviesRepositoryImp(mockMoviesDatasource);
+    repository = HomeRepositoryImp(mockMoviesDatasource);
   });
 
   final tMovies = [
@@ -41,18 +41,18 @@ void main() {
 
   group('fetchPopular', () {
     test('should return list of movies when the call to datasource is successful', () async {
-      when(mockMoviesDatasource.fetchPopular()).thenAnswer((_) async => tMovies);
+      when(mockMoviesDatasource.fetchPopularMovies()).thenAnswer((_) async => tMovies);
 
-      final result = await repository.fetchPopular();
+      final result = await repository.fetchPopularMovies();
 
       expect(result, Right(tMovies));
-      verify(mockMoviesDatasource.fetchPopular());
+      verify(mockMoviesDatasource.fetchPopularMovies());
       verifyNoMoreInteractions(mockMoviesDatasource);
     });
 
    test('should return a Failure when the call to datasource is unsuccessful', () async {
 
-      when(await mockMoviesDatasource.fetchPopular()).thenThrow(DioException(
+      when(await mockMoviesDatasource.fetchPopularMovies()).thenThrow(DioException(
         requestOptions: RequestOptions(path: ''),
         response: Response(
           requestOptions: RequestOptions(path: ''),
@@ -60,12 +60,12 @@ void main() {
         ),
       ));
 
-      expect(
-        () async => await repository.fetchPopular(),
+      expectLater(
+        () async => await repository.fetchPopularMovies(),
         throwsA(isA<Failure>()),
       );
 
-      verify(mockMoviesDatasource.fetchPopular());
+      verify(mockMoviesDatasource.fetchPopularMovies());
       verifyNoMoreInteractions(mockMoviesDatasource);
     });
   });
@@ -73,18 +73,18 @@ void main() {
   group('fetchTopRated', () {
     test('should return list of movies when the call to datasource is successful', () async {
 
-      when(mockMoviesDatasource.fetchTopRated()).thenAnswer((_) async => tMovies);
+      when(mockMoviesDatasource.fetchTopRatedMovies()).thenAnswer((_) async => tMovies);
 
-      final result = await repository.fetchTopRated();
+      final result = await repository.fetchTopRatedMovies();
 
       expect(result, Right(tMovies));
-      verify(mockMoviesDatasource.fetchTopRated());
+      verify(mockMoviesDatasource.fetchTopRatedMovies());
       verifyNoMoreInteractions(mockMoviesDatasource);
     });
 
     test('should return a Failure when the call to datasource is unsuccessful', () async {
 
-      when(mockMoviesDatasource.fetchTopRated()).thenThrow(DioException(
+      when(mockMoviesDatasource.fetchTopRatedMovies()).thenThrow(DioException(
         requestOptions: RequestOptions(path: ''),
         response: Response(
           requestOptions: RequestOptions(path: ''),
@@ -93,11 +93,11 @@ void main() {
       ));
 
       expect(
-        () async => await repository.fetchTopRated(),
+        () async => await repository.fetchTopRatedMovies(),
         throwsA(isA<InternalErrorFailure>()),
       );
 
-      verify(mockMoviesDatasource.fetchTopRated());
+      verify(mockMoviesDatasource.fetchTopRatedMovies());
       verifyNoMoreInteractions(mockMoviesDatasource);
     });
   });

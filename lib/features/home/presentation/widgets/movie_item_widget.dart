@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:themoviedb_app/features/home/domain/entity/movie.dart';
+import 'package:themoviedb_app/shared/domain/entity/movie.dart';
 
 class MovieItemWidget extends StatelessWidget {
   final MovieEntity movie;

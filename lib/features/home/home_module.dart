@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:themoviedb_app/core/app_client.dart';
 import 'package:themoviedb_app/core/app_routes.dart';
-import 'package:themoviedb_app/features/home/data/datasource/movies_datasource.dart';
-import 'package:themoviedb_app/features/home/data/datasource/remote/movies_datasource_imp.dart';
+import 'package:themoviedb_app/features/home/data/datasource/home_datasource.dart';
+import 'package:themoviedb_app/features/home/data/datasource/remote/home_datasource_imp.dart';
 import 'package:themoviedb_app/features/home/data/repository/movies_repository_imp.dart';
 import 'package:themoviedb_app/features/home/domain/repository/movies_repository.dart';
 import 'package:themoviedb_app/features/home/domain/usecases/fetch_popular_movies_usecase.dart';
@@ -25,26 +25,26 @@ class HomeModule extends Module {
       ),
     ),
     //Datasources
-    Bind.factory<MoviesDatasource>(
-      (i) => MoviesDatasourceImp(
+    Bind.factory<HomeDatasource>(
+      (i) => HomeDatasourceImp(
         i.get<AppClient>(),
       ),
     ),
     //Repository
-    Bind.factory<MoviesRepository>(
-      (i) => MoviesRepositoryImp(
-        i.get<MoviesDatasource>(),
+    Bind.factory<HomeRepository>(
+      (i) => HomeRepositoryImp(
+        i.get<HomeDatasource>(),
       ),
     ),
     //Usecases
     Bind.factory<FetchTopRatedMoviesUsecase>(
       (i) => FetchTopRatedMoviesUsecaseImp(
-        i.get<MoviesRepository>(),
+        i.get<HomeRepository>(),
       ),
     ),
     Bind.factory<FetchPopularMoviesUsecase>(
       (i) => FetchPopularMoviesUsecaseImp(
-        i.get<MoviesRepository>(),
+        i.get<HomeRepository>(),
       ),
     ),
   ];

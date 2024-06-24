@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:dio/dio.dart';
 
 abstract class Failure extends DioException {

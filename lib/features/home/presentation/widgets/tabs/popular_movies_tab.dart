@@ -4,7 +4,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 import 'package:themoviedb_app/core/enums/loading_state.dart';
 import 'package:themoviedb_app/features/home/presentation/controllers/popular_movies_tab_controller.dart';
 import 'package:themoviedb_app/features/home/presentation/widgets/movie_item_widget.dart';
-import 'package:themoviedb_app/features/home/presentation/widgets/movies_grid_skeleton.dart';
+import 'package:themoviedb_app/shared/presentation/widgets/movies_grid_skeleton.dart';
 
 class PopularMoviesTab extends StatefulWidget {
   const PopularMoviesTab({super.key});
@@ -14,14 +14,14 @@ class PopularMoviesTab extends StatefulWidget {
 }
 
 class _PopularMoviesTabState extends State<PopularMoviesTab> {
-  final PopularMoviesTabController controller = Modular.get<PopularMoviesTabController>()..fetchData();
+  final controller = Modular.get<PopularMoviesTabController>()..fetchData();
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: controller.state,
         builder: (context, s, w) {
-          return s == LoadingState.loading
+          return s != LoadingState.loaded
               ? const MoviesGridSkeleton()
               : ResponsiveGridList(
                   physics: const NeverScrollableScrollPhysics(),

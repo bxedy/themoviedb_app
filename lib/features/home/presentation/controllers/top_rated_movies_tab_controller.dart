@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:themoviedb_app/core/enums/loading_state.dart';
-import 'package:themoviedb_app/features/home/domain/entity/movie.dart';
+import 'package:themoviedb_app/shared/domain/entity/movie.dart';
 import 'package:themoviedb_app/features/home/domain/usecases/fetch_top_rated_movies_usecase.dart';
 
 class TopRatedMoviesTabController {

@@ -6,9 +6,9 @@ class AppClient {
   AppClient() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: 'https://api.themoviedb.org/3/movie/',
-        connectTimeout: Duration(seconds: 10),
-        receiveTimeout: Duration(seconds: 10),
+        baseUrl: 'https://api.themoviedb.org/3/',
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
       ),
     );
   }
