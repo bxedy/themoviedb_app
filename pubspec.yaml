@@ -9,11 +9,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.10+1
+  responsive_grid: ^2.4.4
+  dio: any
+  dartz: 0.10.1
+  flutter_modular: 5.0.3
+  intl: any
+  shimmer: 3.0.0
+  animate_do: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: any
+  build_runner: any
   flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
