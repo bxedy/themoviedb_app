@@ -57,7 +57,7 @@ cd movielistingapp</code></pre>
 <ul>
   <li><strong>Search</strong>: Use the search bar to look for TV shows and movies. The debounce feature ensures efficient querying.</li>
   <li><strong>Popular & Trending</strong>: Switch between popular and trending categories using the provided tabs.</li>
-  <li><strong>Error Handling</strong>: If an error occurs, the app will provide an appropriate message to the user.</li>
+  <li><strong>Error Handling</strong>: If an error occurs, the app will handle it</li>
 </ul>
 
 </body>
