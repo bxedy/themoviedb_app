@@ -50,6 +50,6 @@ cd themoviedb_app</code></pre>
 <h2>Screenshots</h2>
 <img src="https://github.com/bxedy/themoviedb_app/assets/86973277/eb4dd772-c78f-490b-aca0-96a9c2a40f58.gif" width="31%">
 
-<img src="https://github.com/bxedy/themoviedb_app/assets/86973277/6ce9cfaf-295b-49f1-9278-2bd8dac57c2c.gif" width="31%">
+<img src="https://github.com/bxedy/themoviedb_app/assets/86973277/6ce9cfaf-295b-49f1-9278-2bd8dac57c2c.gif" width="69%">
 
 </html>
