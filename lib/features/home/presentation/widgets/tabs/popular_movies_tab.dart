@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:themoviedb_app/core/enums/loading_state.dart';
 import 'package:themoviedb_app/features/home/presentation/controllers/popular_movies_tab_controller.dart';
-import 'package:themoviedb_app/features/home/presentation/widgets/movie_item_widget.dart';
+import 'package:themoviedb_app/shared/presentation/widgets/movie_item_widget.dart';
 import 'package:themoviedb_app/shared/presentation/widgets/movies_grid_skeleton.dart';
 
 class PopularMoviesTab extends StatefulWidget {

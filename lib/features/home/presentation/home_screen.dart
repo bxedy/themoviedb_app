@@ -76,14 +76,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       children: [
                         const SizedBox(height: 24),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 1),
                               borderRadius: BorderRadius.circular(25.0),
                             ),
-                            height: 36,
-                            width: MediaQuery.sizeOf(context).width * 0.6,
+                            height: 32,
+                            width: 200,
                             child: TabBar(
                               splashBorderRadius: BorderRadius.circular(25.0),
                               controller: _tabController,
@@ -113,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             ),
                           ),
                         ),
+                        const SizedBox(height: 24),
                         [const TopRatedMoviesTab(), const PopularMoviesTab()][_tabController.index],
                         const SizedBox(height: 24),
                       ],

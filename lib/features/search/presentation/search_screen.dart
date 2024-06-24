@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:themoviedb_app/core/app_icons.dart';
 import 'package:themoviedb_app/core/enums/loading_state.dart';
-import 'package:themoviedb_app/features/home/presentation/widgets/movie_item_widget.dart';
+import 'package:themoviedb_app/shared/presentation/widgets/movie_item_widget.dart';
 import 'package:themoviedb_app/features/search/presentation/search_controller.dart';
 import 'package:themoviedb_app/shared/presentation/widgets/movies_grid_skeleton.dart';
 
@@ -73,6 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   );
                 }),
+            const SizedBox(height: 24),
             ValueListenableBuilder(
                 valueListenable: searchController.state,
                 builder: (context, s, w) {
